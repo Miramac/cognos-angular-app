@@ -11,7 +11,7 @@ describe('Unit: ExampleCtrl', function() {
     angular.mock.module('app');
 
     angular.mock.inject(function($controller) {
-      ctrl = $controller('ExampleCtrl');
+      ctrl = $controller('HomeCtrl');
     });
   });
 
@@ -23,8 +23,8 @@ describe('Unit: ExampleCtrl', function() {
     expect(ctrl.number).toEqual(1234);
   });
 
-  it('should have a title variable equal to \'AngularJS, Gulp, and Browserify!\'', function() {
-    expect(ctrl.title).toEqual('AngularJS, Gulp, and Browserify!');
+  it('should have a title variable equal to \'Home!\'', function() {
+    expect(ctrl.title).toEqual('Home!');
   });
 
 });

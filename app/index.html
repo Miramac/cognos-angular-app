@@ -29,8 +29,8 @@
                 </div>
                 <div id="top-navbar" class="navbar-collapse collapse" ng-controller-x="NavbarCtrl">
                     <ul class="nav navbar-nav">
-                        <li ng-class="start"><a href="/reports">Overview</a></li>
-                        <li ng-class="report"><a href="/report">Create Report</a></li>
+                        <li ng-class="(navLink === '/reports') ? 'active' : ''"><a ui-sref="ReportList">Overview</a></li>
+                        <li ng-class="(navLink === '/edit') ? 'active' : ''"><a ui-sref="EditReport">Create Report</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/settings">Settings</a></li>

@@ -17,5 +17,4 @@ describe('E2E: Example', function() {
     var element = browser.findElement(by.css('.number-example'));
     expect(element.getText()).toEqual('1234');
   });
-
 });

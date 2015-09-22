@@ -19,6 +19,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
     controller: 'HomeCtrl as home',
     templateUrl: 'reportlist.html',
     title: 'Report List'
+  })
+  .state('EditReport', {
+    url: '/edit',
+    controller: 'HomeCtrl as home',
+    templateUrl: 'reportlist.html',
+    title: 'Report List'
   });
 
   $urlRouterProvider.otherwise('/');

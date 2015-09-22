@@ -1,7 +1,7 @@
 'use strict';
 
 var AppSettings = {
-  appTitle: 'Cognos',
+  appTitle: 'Cognos WebApp',
   apiUrl: '/api/v1'
 };
 
