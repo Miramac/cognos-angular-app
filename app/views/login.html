@@ -1,7 +1,9 @@
-<h1 class="heading -large">{{ home.title }}</h1>
-
-<h3 class="heading -medium">Here is a fancy number served up courtesy of Angular: <span class="number-example">{{ home.number }}</span></h3>
-
-<img src="images/angular.png" height="100" example-directive />
-<img src="images/gulp.png" height="100" />
-<img src="images/browserify.png" height="100" />
+<h1 class="heading -large">{{ login.title }}</h1>
+<form class="form-signin" ng-submit="login.doLogin()">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label for="inputUserName" class="sr-only">User name</label>
+    <input type="text" id="inputUserName" class="form-control" placeholder="User name" required autofocus ng-model="login.userName">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required  ng-model="login.password">
+    <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
+</form>

@@ -34,18 +34,14 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/settings">Settings</a></li>
-                        <li><a href="/Logout">Logout</a></li>
+                        <li><a ui-sref="Login">Login</a></li>
                         <li><a href="/help">Help</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 main" ui-view>
-            <!-- main view --> 
-            </div>
-        </div>
+        <div class="container-fluid" ui-view>
+           
         </div>
        
         <script src="js/main.js"></script>

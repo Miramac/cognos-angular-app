@@ -31,9 +31,9 @@ angular.element(document).ready(function() {
 
   angular.module('app').constant('AppSettings', require('./constants'));
 
-  angular.module('app').config(require('./on_config'));
+  angular.module('app').config(require('./config'));
 
-  angular.module('app').run(require('./on_run'));
+  angular.module('app').run(require('./run'));
 
   angular.bootstrap(document, ['app']);
 
