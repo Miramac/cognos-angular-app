@@ -1,0 +1,23 @@
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import 'vars';
+@import 'typography';
+
+body {
+  font-family: Helvetica, sans-serif;
+  color: $font-color--dark;
+  background-color: $background--light;
+  padding: $full-space;
+}
+
+.main {
+  padding: $half-space;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: $full-space;
+    padding-left: $full-space;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
