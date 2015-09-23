@@ -43,7 +43,7 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
             resolve: { authenticate: authenticate }
         });
 
-    // $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/');
 
 
     function authenticate($q, $state, $timeout, AuthService) {

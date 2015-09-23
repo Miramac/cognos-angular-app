@@ -6,13 +6,14 @@ var controllersModule = require('./_index');
  * @ngInject
  */
 function ApplicationCtrl($scope, AuthService) {
-    $scope.currentUser = null;
-    $scope.isAuthenticated =  AuthService.isAuthenticated; //function() {return false;}//
-
-    $scope.setCurrentUser = function (user) {
-        $scope.currentUser = user;
-    };
-
+   
+    $scope.isAuthenticated =  AuthService.isAuthenticated;
+    $scope.getDisplayName =  AuthService.getDisplayName;
+    $scope.logout = AuthService.logout; 
+    
+    $scope.getNavbar = function() {
+        
+    }
 }
 
 controllersModule.controller('ApplicationCtrl', ApplicationCtrl);

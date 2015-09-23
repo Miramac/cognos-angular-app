@@ -5,7 +5,7 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function LoginCtrl($scope, $rootScope, $state, AuthService, AuthEvents) {
+function LoginCtrl($rootScope, $state, AuthService, AuthEvents) {
     // ViewModel
     var vm = this;
     
@@ -21,8 +21,7 @@ function LoginCtrl($scope, $rootScope, $state, AuthService, AuthEvents) {
         AuthService.login(vm.credentials)
         .then(function (data) {
             $rootScope.$broadcast(AuthEvents.loginSuccess);
-            $scope.setCurrentUser(data.displayName);
-            $state.go('ReportList');
+            $state.go('Home');
         }, function (error) {
             $rootScope.$broadcast(AuthEvents.loginFailed);
             console.log('error: ' + error);

@@ -1,0 +1,1 @@
+* Session kümmert sich auch um cookies
