@@ -5,36 +5,63 @@
  */
 function Config($stateProvider, $locationProvider, $urlRouterProvider) {
 
-  $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
 
-  $stateProvider
-  .state('Home', {
-    url: '/',
-    controller: 'HomeCtrl as home',
-    templateUrl: 'home.html',
-    title: 'Home'
-  })
-  .state('ReportList', {
-    url: '/reports',
-    controller: 'ReportListCtrl as reportList',
-    templateUrl: 'reportlist.html',
-    title: 'Report List'
-  })
-  .state('EditReport', {
-    url: '/edit',
-    controller: 'EditReportCtrl as editReport',
-    templateUrl: 'editreport.html',
-    title: 'Edit Report'
-  })
-  .state('Login', {
-    url: '/login',
-    controller: 'LoginCtrl as login',
-    templateUrl: 'login.html',
-    title: 'Login'
-  });
+    $stateProvider
+        .state('Home', {
+            url: '/',
+            controller: 'HomeCtrl as home',
+            templateUrl: 'home.html',
+            title: 'Home',
+            resolve: { authenticate: authenticate }
+        })
+        .state('ReportList', {
+            url: '/reports',
+            controller: 'ReportListCtrl as reportList',
+            templateUrl: 'reportlist.html',
+            title: 'Report List',
+            resolve: { authenticate: authenticate }
+        })
+        .state('EditReport', {
+            url: '/edit',
+            controller: 'EditReportCtrl as editReport',
+            templateUrl: 'editreport.html',
+            title: 'Edit Report',
+            resolve: { authenticate: authenticate }
+        })
+        .state('Login', {
+            url: '/login',
+            controller: 'LoginCtrl as login',
+            templateUrl: 'login.html',
+            title: 'Login'
+        })
+        .state('Logout', {
+            url: '/logout',
+            controller: 'LoginCtrl as login',
+            templateUrl: 'login.html',
+            title: 'Logout',
+            resolve: { authenticate: authenticate }
+        });
 
-  $urlRouterProvider.otherwise('/login');
+    // $urlRouterProvider.otherwise('/login');
 
+
+    function authenticate($q, $state, $timeout, AuthService) {
+        if (AuthService.isAuthenticated()) {
+            // Resolve the promise successfully
+            return $q.when()
+        } else {
+            // The next bit of code is asynchronously tricky.
+            $timeout(function () {
+                // This code runs after the authentication promise has been rejected.
+                // Go to the log-in page
+                $state.go('Login')
+            })
+
+            // Reject the authentication promise to prevent the state from loading
+            return $q.reject()
+        }
+    }
 }
 
 module.exports = Config;

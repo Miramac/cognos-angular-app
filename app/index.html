@@ -15,7 +15,7 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body ng-controller="ApplicationCtrl">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -27,15 +27,16 @@
                     </button>
                     <a class="navbar-brand" href="/">Cognos WebApp</a>
                 </div>
-                <div id="top-navbar" class="navbar-collapse collapse" ng-controller-x="NavbarCtrl">
-                    <ul class="nav navbar-nav">
+                <div id="top-navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav"  ng-hide="isAuthenticated() == false">
                         <li ng-class="(navLink === '/reports') ? 'active' : ''"><a ui-sref="ReportList">Overview</a></li>
                         <li ng-class="(navLink === '/edit') ? 'active' : ''"><a ui-sref="EditReport">Create Report</a></li>
                     </ul>
+                    <p class="navbar-text" ng-hide="isAuthenticated() == false"><small>Signed in as {{currentUser}}</small></p>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/settings">Settings</a></li>
-                        <li><a ui-sref="Login">Login</a></li>
-                        <li><a href="/help">Help</a></li>
+                        <li ng-class="(navLink === '/Login') ? 'active' : ''"><a ui-sref="Login" ng-hide="isAuthenticated() == true" >Login</a></li>
+                        <li ng-class="(navLink === '/Logout') ? 'active' : ''"><a href="#/Logout"  ng-hide="isAuthenticated() == false">Logout</a></li>
+                        <li ng-class="(navLink === '/help') ? 'active' : ''"><a href="#/help">Help</a></li>
                     </ul>
                 </div>
             </div>

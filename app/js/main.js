@@ -5,6 +5,7 @@ var angular = require('angular');
 // angular modules
 require('angular-ui-router');
 require('angular-animate');
+require('angular-cookies');
 require('angular-ui-bootstrap');
 require('./templates');
 require('./controllers/_index');
@@ -17,6 +18,7 @@ var constants = require('./constants')
 angular.element(document).ready(function() {
 
     var requires = [
+        'ngCookies',
         'ngAnimate', 
         'ui.bootstrap',
         'ui.router',

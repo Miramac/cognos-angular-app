@@ -5,30 +5,31 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function LoginCtrl($http, Session, AppSettings) {
+function LoginCtrl($scope, $rootScope, $state, AuthService, AuthEvents) {
     // ViewModel
     var vm = this;
     
     vm.title = 'Login!';
+    vm.credentials = {
+        username: '',
+        password: ''
+    };
     
-    var loginUrl = AppSettings.cognosCgi + '/rds/auth/logon';
+    vm.loginError = false;
     
-    vm.doLogin = function() {
-        console.log('Log in: ', AppSettings.cognosCgi, vm.username, vm.password);
-        var xmlCredentials = AppSettings.xmlCredentialTpl.replace('{{username}}', vm.username).replace('{{password}}', vm.password);
-        return Session.create("a", "b", "c");
-  
-      //  return AuthService.login(xmlCredentials);
-/*
-        $http.post(loginUrl, { xmlData: xmlCredentials }).
-            then(function (response) {
-                console.log('succses: ', response.data);
-            }, function (response) {
-                console.log('error: ', response.data);
-            });
-    
-        return false;
-        */
+    vm.login = function() {
+        AuthService.login(vm.credentials)
+        .then(function (data) {
+            $rootScope.$broadcast(AuthEvents.loginSuccess);
+            $scope.setCurrentUser(data.displayName);
+            $state.go('ReportList');
+        }, function (error) {
+            $rootScope.$broadcast(AuthEvents.loginFailed);
+            console.log('error: ' + error);
+            
+            vm.loginError = true;
+            vm.credentials.password = '';
+        });
     };
 }
 

@@ -1,20 +1,18 @@
 'use strict';
 
-var servicesModule = require('./_index.js');
+var servicesModule = require('./_index');
 
 /**
  * @ngInject
  */
 function Session() {
-  this.create = function (sessionId, userId, userRole) {
-    this.id = sessionId;
-    this.userId = userId;
-    this.userRole = userRole;
+  this.create = function (accountID, displayName) {
+    this.accountID = accountID;
+    this.displayName = displayName;
   };
   this.destroy = function () {
-    this.id = null;
-    this.userId = null;
-    this.userRole = null;
+    this.accountID = null;
+    this.displayName = null;
   };
 }
 
