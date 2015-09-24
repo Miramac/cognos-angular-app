@@ -1,5 +1,5 @@
 {
-  "name": "cog-app",
+  "name": "cognos-web-app",
   "keywords": [
     "express",
     "gulp",
@@ -68,6 +68,8 @@
     "watchify": "^2.0.0"
   },
   "scripts": {
+    "start": "gulp dev",
+    "build": "gulp prod",
     "pretest": "npm install",
     "test": "karma start test/karma.conf.js",
     "preprotractor": "npm run update-webdriver",
