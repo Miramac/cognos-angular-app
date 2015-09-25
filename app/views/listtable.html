@@ -1,5 +1,17 @@
 <h1 class="heading -large"> {{ table.title }}</h1>
 
-<code>
+<table class="table">
+    <tr ng-if="$first" ng-repeat="row in table.data">
+        <th ng-repeat="cell in row">
+            {{cell.val}}
+        </th>
+    </tr>
+    <tr ng-if="!$first" ng-repeat="row in table.data">
+        <td ng-repeat="cell in row">
+            {{cell.val}}
+        </td>
+    </tr>
+</table>
+<pre>
     {{table.data | json}}
-</code>
+</pre>

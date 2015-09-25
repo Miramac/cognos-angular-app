@@ -16,7 +16,7 @@ function ReportService($q, $http, AppSettings) {
 
         getReportItem(reportPath, name, parameters)
             .then(function (res) {
-                var list = res.data.document.pages[0].page.body.item[0].lst;
+                var list =  res.data; //res.data.document.pages[0].page.body.item[0].lst;
                 deferred.resolve(list);
             }, function (err, status) {
                 deferred.reject(err, status);
@@ -32,7 +32,7 @@ function ReportService($q, $http, AppSettings) {
 
         var rdsUrl = AppSettings.cognosCgi + '/rds/reportData/' + reportPath;
         /** TESTING */
-        rdsUrl = '/cognos/report.json';
+        rdsUrl = '/cognos/report_table.json';
 
         return $http.get(rdsUrl, parameters);
     };
