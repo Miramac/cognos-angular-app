@@ -7,9 +7,8 @@ var browserSync = require('browser-sync');
 
 gulp.task('devcognos', function() {
 
-  return gulp.src('app/cognos/**/*')
-    .pipe(changed('app/cognos/**/*')) // Ignore unchanged files
-    .pipe(gulp.dest('build/cognos'))
+  return gulp.src(config.cognos.src)
+    .pipe(changed(config.cognos.src)) // Ignore unchanged files
+    .pipe(gulp.dest(config.cognos.dest))
     .pipe(browserSync.stream({ once: true }));
-
 });
