@@ -36,7 +36,7 @@ function ReportService($q, $http, AppSettings) {
 
         var rdsUrl = AppSettings.cognosCgi + '/rds/reportData/searchPath/' + reportPath;
         /** TESTING */
-        rdsUrl = '/cognos/report_table.json';
+        rdsUrl = '/cognos/listtable.json';
 
         return $http.get(rdsUrl, { params: parameters });
     };
