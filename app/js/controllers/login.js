@@ -19,7 +19,7 @@ function LoginCtrl($rootScope, $state, AuthService, AuthEvents) {
     
     vm.login = function() {
         AuthService.login(vm.credentials)
-        .then(function (data) {
+        .then(function () {
             $rootScope.$broadcast(AuthEvents.loginSuccess);
             $state.go('Home');
         }, function (error) {

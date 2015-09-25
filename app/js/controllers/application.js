@@ -13,7 +13,7 @@ function ApplicationCtrl($scope, AuthService) {
     
     $scope.getNavbar = function() {
         
-    }
+    };
 }
 
 controllersModule.controller('ApplicationCtrl', ApplicationCtrl);

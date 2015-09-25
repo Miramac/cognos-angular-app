@@ -5,19 +5,19 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function ReportListCtrl(ReportService) {
+function ListTableCtrl(ReportService) {
 
   // ViewModel
   var vm = this;
 
-  vm.title = 'Report List';
-  
+  vm.title = 'ListTable';
+ 
   ReportService.getListTable('report/i9A274F2F3DDA4C0D87A0E1B3C108918E', 'List1', {p_Report_ID: 10001})
   .then(function(data) {
-       console.log("data: " + data)
+       vm.data = data.colTitle;
   }, function(error) {
-      console.log("error: " + error)
-  })
+      console.log("error: " + error);
+  });
 }
 
-controllersModule.controller('ReportListCtrl', ReportListCtrl);
+controllersModule.controller('ListTableCtrl', ListTableCtrl);

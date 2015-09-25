@@ -6,7 +6,23 @@
 function Config($stateProvider, $locationProvider, $urlRouterProvider) {
 
     //$locationProvider.html5Mode(true);
+  var authenticate = function($q, $state, $timeout, AuthService) {
+        if (AuthService.isAuthenticated()) {
+            // Resolve the promise successfully
+            return $q.when();
+        } else {
+            // The next bit of code is asynchronously tricky.
+            $timeout(function () {
+                // This code runs after the authentication promise has been rejected.
+                // Go to the log-in page
+                $state.go('Login');
+            });
 
+            // Reject the authentication promise to prevent the state from loading
+            return $q.reject();
+        }
+    };
+    
     $stateProvider
         .state('Home', {
             url: '/',
@@ -15,11 +31,11 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
             title: 'Home',
             resolve: { authenticate: authenticate }
         })
-        .state('ReportList', {
-            url: '/reports',
-            controller: 'ReportListCtrl as reportList',
-            templateUrl: 'reportlist.html',
-            title: 'Report List',
+        .state('ListTable', {
+            url: '/list-table',
+            controller: 'ListTableCtrl as table',
+            templateUrl: 'listtable.html',
+            title: 'ListTable',
             resolve: { authenticate: authenticate }
         })
         .state('EditReport', {
@@ -46,22 +62,7 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
 
 
-    function authenticate($q, $state, $timeout, AuthService) {
-        if (AuthService.isAuthenticated()) {
-            // Resolve the promise successfully
-            return $q.when()
-        } else {
-            // The next bit of code is asynchronously tricky.
-            $timeout(function () {
-                // This code runs after the authentication promise has been rejected.
-                // Go to the log-in page
-                $state.go('Login')
-            })
-
-            // Reject the authentication promise to prevent the state from loading
-            return $q.reject()
-        }
-    }
+   
 }
 
 module.exports = Config;

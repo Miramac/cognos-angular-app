@@ -12,7 +12,7 @@ require('./controllers/_index');
 require('./services/_index');
 require('./directives/_index');
 
-var constants = require('./constants')
+var constants = require('./constants');
 
 // create and bootstrap application
 angular.element(document).ready(function() {
