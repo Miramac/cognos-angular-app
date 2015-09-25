@@ -16,8 +16,11 @@ function ReportService($q, $http, AppSettings) {
 
         getReportItem(reportPath, name, parameters)
             .then(function (res) {
-                var list =  res.data; //res.data.document.pages[0].page.body.item[0].lst;
-                deferred.resolve(list);
+                if (res.data.filterResultSet && res.data.filterResultSet.filterResult[0] && res.data.filterResultSet.filterResult[0].reportElement[0] && res.data.filterResultSet.filterResult[0].reportElement[0].lst) {
+                    deferred.resolve(res.data.filterResultSet.filterResult[0].reportElement[0].lst);
+                } else {
+                    deferred.reject("MISSING DATA");
+                }
             }, function (err, status) {
                 deferred.reject(err, status);
             });
@@ -27,14 +30,15 @@ function ReportService($q, $http, AppSettings) {
 
     var getReportItem = function (reportPath, name, parameters) {
         parameters = (parameters) ? parameters : {};
-        parameters.frm = 'json';
+        parameters.frm = (parameters.frm) ? parameters.frm : 'json';
         parameters.selection = name;
+        parameters.nocache = new Date().getTime();
 
-        var rdsUrl = AppSettings.cognosCgi + '/rds/reportData/' + reportPath;
+        var rdsUrl = AppSettings.cognosCgi + '/rds/reportData/searchPath/' + reportPath;
         /** TESTING */
         rdsUrl = '/cognos/report_table.json';
 
-        return $http.get(rdsUrl, parameters);
+        return $http.get(rdsUrl, { params: parameters });
     };
 
     return reportService;

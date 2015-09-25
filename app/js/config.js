@@ -38,11 +38,11 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
             title: 'ListTable',
             resolve: { authenticate: authenticate }
         })
-        .state('EditReport', {
-            url: '/edit',
-            controller: 'EditReportCtrl as editReport',
-            templateUrl: 'editreport.html',
-            title: 'Edit Report',
+        .state('CrossTable', {
+            url: '/cross-table',
+            controller: 'CrossTableCtrl as table',
+            templateUrl: 'crosstable.html',
+            title: 'CrossTable',
             resolve: { authenticate: authenticate }
         })
         .state('Login', {

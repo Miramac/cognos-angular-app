@@ -5,13 +5,13 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function EditReportCtrl() {
+function CrossTableCtrl() {
 
   // ViewModel
   var vm = this;
 
-  vm.title = 'Edit Report';
+  vm.title = 'Cross Table';
 
 }
 
-controllersModule.controller('EditReportCtrl', EditReportCtrl);
+controllersModule.controller('CrossTableCtrl', CrossTableCtrl);

@@ -1,14 +1,12 @@
 <h1 class="heading -large"> {{ table.title }}</h1>
 
 <table class="table">
-    <tr ng-if="$first" ng-repeat="row in table.data">
-        <th ng-repeat="cell in row">
-            {{cell.val}}
+    <tr ng-repeat="row in table.data">
+        <th ng-if="row.type == 'header'" ng-repeat="cell in row.data">
+            <span ng-repeat="item in cell">{{item.val}}</span>
         </th>
-    </tr>
-    <tr ng-if="!$first" ng-repeat="row in table.data">
-        <td ng-repeat="cell in row">
-            {{cell.val}}
+        <td ng-if="row.type == 'body'" ng-repeat="cell in row.data">
+            <span ng-repeat="item in cell">{{item.val}}</span>
         </td>
     </tr>
 </table>
