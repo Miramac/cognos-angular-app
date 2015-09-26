@@ -2,10 +2,10 @@
 
 <table class="table">
     <tr ng-repeat="row in table.data">
-        <th ng-if="row.type == 'header'" ng-repeat="cell in row.data">
+        <th ng-if="row.rowType == 'header'" ng-repeat="cell in row.data">
             <span ng-repeat="item in cell">{{item.val}}</span>
         </th>
-        <td ng-if="row.type == 'body'" ng-repeat="cell in row.data">
+        <td ng-if="row.rowType == 'body'" ng-repeat="cell in row.data">
             <span ng-repeat="item in cell">{{item.val}}</span>
         </td>
     </tr>

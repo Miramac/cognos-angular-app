@@ -16,8 +16,8 @@ function ReportService($q, $http, AppSettings) {
 
         getReportItem(reportPath, name, parameters)
             .then(function (res) {
-                if (res.data.filterResultSet && res.data.filterResultSet.filterResult[0] && res.data.filterResultSet.filterResult[0].reportElement[0] && res.data.filterResultSet.filterResult[0].reportElement[0].lst) {
-                    deferred.resolve(res.data.filterResultSet.filterResult[0].reportElement[0].lst);
+                if (res.data.filterResultSet && res.data.filterResultSet.filterResult[0] && res.data.filterResultSet.filterResult[0].reportElement[0]) {
+                    deferred.resolve(res.data.filterResultSet.filterResult[0].reportElement[0]);
                 } else {
                     deferred.reject("MISSING DATA");
                 }
