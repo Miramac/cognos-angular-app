@@ -1,9 +1,14 @@
+
+
 <h1 class="heading -large">{{ login.title }}</h1>
 <form class="form-signin" ng-submit="login.login()">
     <h2 class="form-signin-heading">Please sign in</h2>
+    <div class="alert alert-danger" role="alert" ng-show="login.loginError">
+        Incorrect username or password. 
+    </div>
     <label for="inputUserName" class="sr-only">User name</label>
     <input type="text" id="inputUserName" class="form-control" placeholder="User name" required autofocus ng-model="login.credentials.username">
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required  ng-model="login.credentials.password">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="login.credentials.password">
     <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
 </form>

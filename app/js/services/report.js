@@ -30,13 +30,13 @@ function ReportService($q, $http, AppSettings) {
 
     var getReportItem = function (reportPath, name, parameters) {
         parameters = (parameters) ? parameters : {};
-        parameters.frm = (parameters.frm) ? parameters.frm : 'json';
+        parameters.fmt = (parameters.fmt) ? parameters.fmt : 'json';
         parameters.selection = name;
         parameters.nocache = new Date().getTime();
-
-        var rdsUrl = AppSettings.cognosCgi + '/rds/reportData/searchPath/' + reportPath;
+        
+        var rdsUrl = AppSettings.cognosCgi + '/rds/reportData/searchPath' + reportPath;
         /** TESTING */
-        rdsUrl = '/cognos/listtable.json';
+     //   rdsUrl = '/cognos/listtable.json';
 
         return $http.get(rdsUrl, { params: parameters });
     };
