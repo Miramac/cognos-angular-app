@@ -35,8 +35,6 @@ function ReportService($q, $http, AppSettings) {
         parameters.nocache = new Date().getTime();
         
         var rdsUrl = AppSettings.cognosCgi + '/rds/reportData/searchPath' + reportPath;
-        /** TESTING */
-     //   rdsUrl = '/cognos/listtable.json';
 
         return $http.get(rdsUrl, { params: parameters });
     };

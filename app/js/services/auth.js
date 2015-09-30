@@ -15,15 +15,8 @@ function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
         var deferred = $q.defer();
         var loginUrl = AppSettings.cognosCgi + '/rds/auth/logon';
 
-        /** TESTING *
-        if (credentials.username === 'roloff') {
-            loginUrl = '/cognos/login_ok.xml';
-        } else {
-            loginUrl = '/cognos/login_fail.xml';
-        }*/
-
         var xmlCredentials = AppSettings.xmlCredentialTpl.replace('{{username}}', credentials.username).replace('{{password}}', credentials.password);
-        $http({method: 'POST',
+        $http({method: 'GET', //must be POST on server! /** TESTING **/
                 url:loginUrl, 
                 data:  'xmlData='+xmlCredentials ,
                 headers: { "Content-Type": 'application/x-www-form-urlencoded' }})
@@ -66,7 +59,7 @@ function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
     authService.logout = function () {
         
         
-        $http.get('/cognos/cgi-bin/cognos.cgi/rds/auth/logoff').then(function(){
+        $http.get(AppSettings.cognosCgi + '/rds/auth/logoff').then(function(){
             var cookies = [ //Cognos coogies
                 'CRN',
                 'cam_passport',
