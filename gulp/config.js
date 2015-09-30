@@ -52,7 +52,12 @@ module.exports = {
         'bundleName': 'main.js',
         'prodSourcemap': false
     },
-
+    'uglify':{
+        'compress': { 
+            'drop_console': true 
+        },
+        'mangle':false
+    },
     'test': {
         'karma': 'test/karma.conf.js',
         'protractor': 'test/protractor.conf.js'
