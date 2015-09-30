@@ -6,7 +6,7 @@
 function Config($stateProvider, $locationProvider, $urlRouterProvider) {
 
     //$locationProvider.html5Mode(true);
-  var authenticate = function($q, $state, $timeout, AuthService) {
+  function authenticate($q, $state, $timeout, AuthService) {
         if (AuthService.isAuthenticated()) {
             // Resolve the promise successfully
             return $q.when();
