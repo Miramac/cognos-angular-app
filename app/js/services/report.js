@@ -5,7 +5,7 @@ var servicesModule = require('./_index');
 /**
  * @ngInject
  */
-function ReportService($q, $http, AppSettings) {
+function ReportService($q, $http, AppSettings, AuthService) {
 
     var reportService = {};
 
@@ -22,7 +22,12 @@ function ReportService($q, $http, AppSettings) {
                     deferred.reject("MISSING DATA");
                 }
             }, function (err, status) {
-                deferred.reject(err, status);
+                if(err.status === 403) {
+                    AuthService.showLogin();
+                  //  return reportService.getListTable(reportPath, name, parameters);
+                }else {
+                    deferred.reject(err, status);
+                }
             });
 
         return deferred.promise;

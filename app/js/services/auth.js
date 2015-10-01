@@ -5,11 +5,23 @@ var servicesModule = require('./_index');
 var xmlToJSON = require('../vendor/xml2json');
 
 /**
- * @ -ngInject
+ * @ngInject
  */
-function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
+function AuthService($q, $http, $cookies, $state, $modal, AppSettings, Session) {
     var authService = {};
 
+    var loginModal 
+
+    authService.showLogin = function() {
+       loginModal = $modal.open({
+            animation: true,
+            templateUrl: 'login-modal.html',
+            controller: 'LoginCtrl as login',
+            backdrop: 'static',
+            keyboard: false
+        });
+    };
+    
     authService.login = function (credentials) {
 
         var deferred = $q.defer();
@@ -29,7 +41,7 @@ function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
                     user.accountID = data.accountInfo[0].accountID[0]._text;
                     user.displayName = data.accountInfo[0].displayName[0]._text;
                     Session.create(user.accountID, user.displayName);
-                   
+                    loginModal.close();
                     deferred.resolve(user);
                 } else {
                     deferred.reject(new Error("Wrong passwort or username"));
@@ -70,7 +82,7 @@ function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
             }
             
             Session.destroy();
-            $state.go('Login');
+            $state.go('Home');
         })
     };
     

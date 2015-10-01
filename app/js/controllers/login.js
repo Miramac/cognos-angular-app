@@ -9,7 +9,7 @@ function LoginCtrl($rootScope, $state, AuthService, AuthEvents) {
     // ViewModel
     var vm = this;
     
-    vm.title = 'Login!';
+    vm.title = 'Cognos WebApp Login';
     vm.credentials = {
         username: '',
         password: ''
@@ -20,12 +20,10 @@ function LoginCtrl($rootScope, $state, AuthService, AuthEvents) {
     vm.login = function() {
         AuthService.login(vm.credentials)
         .then(function () {
-            $rootScope.$broadcast(AuthEvents.loginSuccess);
-            $state.go('Home');
+            $rootScope.$broadcast(AuthEvents.loginSuccess);    
+            vm.loginError = false;       
         }, function (error) {
             $rootScope.$broadcast(AuthEvents.loginFailed);
-            console.log('error: ' + error);
-            
             vm.loginError = true;
             vm.credentials.password = '';
         });

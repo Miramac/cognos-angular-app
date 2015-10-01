@@ -15,13 +15,19 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
             $timeout(function () {
                 // This code runs after the authentication promise has been rejected.
                 // Go to the log-in page
-                $state.go('Login');
+              //  $state.go('Login');
+              //new: show login modal
+              AuthService.showLogin();
             });
 
             // Reject the authentication promise to prevent the state from loading
             return $q.reject();
         }
     };
+    
+    
+
+    
     
     $stateProvider
         .state('Home', {
@@ -45,12 +51,14 @@ function Config($stateProvider, $locationProvider, $urlRouterProvider) {
             title: 'CrossTable',
             resolve: { authenticate: authenticate }
         })
-        .state('Login', {
-            url: '/login',
+     /*   .state('Login', {
+                  url: '/login',
             controller: 'LoginCtrl as login',
             templateUrl: 'login.html',
-            title: 'Login'
-        })
+              //    title: 'Login',
+                  resolve: { authenticate: notauthenticate }
+             })
+             */
         .state('Logout', {
             url: '/logout',
             controller: 'LoginCtrl as login',
