@@ -29,7 +29,7 @@ function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
                     user.accountID = data.accountInfo[0].accountID[0]._text;
                     user.displayName = data.accountInfo[0].displayName[0]._text;
                     Session.create(user.accountID, user.displayName);
-                    $cookies.put('ng_session',user.displayName)
+                   
                     deferred.resolve(user);
                 } else {
                     deferred.reject(new Error("Wrong passwort or username"));
@@ -41,13 +41,10 @@ function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
     };
 
     authService.isAuthenticated = function () {
-        var isAuthenticated = false;
-        var cognosSessionCookie = $cookies.get(AppSettings.cognosSessionCookieName);
-        if (cognosSessionCookie) {
-            isAuthenticated = true;
-            if($cookies.get('ng_session')) {
-                Session.create(cognosSessionCookie, $cookies.get('ng_session').replace(/\*20/gi, ' '));
-            }
+        var isAuthenticated = !!Session.displayName;
+        if (!isAuthenticated) {
+            Session.get();
+            isAuthenticated = !!Session.displayName
         }
         return isAuthenticated;
     };
@@ -71,7 +68,7 @@ function AuthService($q, $http, $cookies, $state, AppSettings, Session) {
             for(i=0; i<cookies.length; i++) {
                 $cookies.remove(cookies[i], {path: '/cognos'});
             }
-            $cookies.remove('ng_session')
+            
             Session.destroy();
             $state.go('Login');
         })
